@@ -2,8 +2,12 @@
 import cv2
 import dlib
 import math
+import time
 
 BLINK_RATIO_THRESHOLD = 3.7
+eyes = False;
+start = time.time()
+
 
 
 # -----Step 5: Getting to know blink ratio
@@ -83,7 +87,12 @@ while True:
         blink_ratio = (left_eye_ratio + right_eye_ratio) / 2
 
         if blink_ratio > BLINK_RATIO_THRESHOLD:
-            # Blink detected! Do Something!
+            end = time.time()
+            time_lapse = end-start
+            print(round(1/(end - start),2))
+            start = time.time()
+
+            
             cv2.putText(frame, "BLINKING", (10, 50), cv2.FONT_HERSHEY_SIMPLEX,
                         2, (255, 255, 255), 2, cv2.LINE_AA)
 
